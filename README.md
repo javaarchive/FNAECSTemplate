@@ -14,7 +14,7 @@ within this template you will also find copious loving explanatory comments for 
 
 - [git](https://git-scm.com) (obviously)
 - [visual studio code](https://code.visualstudio.com) and the omnisharp extension
-- [the .NET 7.0 SDK](https://dotnet.microsoft.com/en-us/download)
+- [the .NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download)
 
 ## instructions
 

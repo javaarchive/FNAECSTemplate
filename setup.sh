@@ -36,6 +36,8 @@ sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate/Utility/InputHe
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate/Systems/Input.cs
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate/Utility/Rando.cs
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate/Content.cs
+sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" build_debug.sh
+sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" build_release.sh
 
 find . -name "*.temp-bak" -type f -delete
 

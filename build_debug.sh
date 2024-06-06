@@ -1,0 +1,1 @@
+dotnet build FNAECSTemplate/FNAECSTemplate.csproj
