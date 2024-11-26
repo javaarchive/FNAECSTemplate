@@ -23,7 +23,7 @@ public static class Fonts
         Opensans = new FontSystem();
         Opensans.AddFont(File.ReadAllBytes(
             Path.Combine(
-                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), content.RootDirectory, @"fonts/opensans.ttf"
+                Path.GetDirectoryName(Assembly.GetCallingAssembly().Location), content.RootDirectory, @"fonts/opensans.ttf" 
             )
         ));
     }
