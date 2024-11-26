@@ -29,12 +29,13 @@ public class Game1 : Game
     [STAThread]
     internal static void Main()
     {
+        Console.WriteLine("using this main is deprecated, please use the Console project");
         using (Game1 game = new Game1())
         {
             game.Run();
         }
     }
-    private Game1()
+    public Game1()
     {
         //setup our graphics device, default window size, etc
         //here is where i will make a plea to you, intrepid game developer:
@@ -48,6 +49,10 @@ public class Game1 : Game
 
         IsFixedTimeStep = false;
         IsMouseVisible = true;
+    }
+
+    public void OnAudioAllowedToInit(){
+        // load audio here
     }
 
     //you'll want to do most setup in LoadContent() rather than your constructor.

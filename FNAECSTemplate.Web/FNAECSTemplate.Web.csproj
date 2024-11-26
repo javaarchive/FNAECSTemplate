@@ -1,0 +1,174 @@
+<Project Sdk="Microsoft.NET.Sdk.WebAssembly">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup>
+      <WasmBuildNative>true</WasmBuildNative>
+      <EmccLinkOptimizationFlag>-O1</EmccLinkOptimizationFlag>
+      <EmccExtraLDFlags>--js-library $(MSBuildProjectDirectory.Replace('\', '/'))/js/library-fixemscripten.js -sFULL_ES3</EmccExtraLDFlags>
+      <WasmEmitSymbolMap>true</WasmEmitSymbolMap>
+      <WasmAllowUndefinedSymbols>true</WasmAllowUndefinedSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+      <!-- Get the emscripten-built binaries for these native files, and save them to the folders -->
+      
+      <NativeFileReference Include="..\lib\SDL2\browser-wasm\SDL2.a">
+          <Visible>false</Visible>
+      </NativeFileReference>
+      <NativeFileReference Include="..\lib\FNA3D\browser-wasm\FAudio.a">
+          <Visible>false</Visible>
+      </NativeFileReference>
+      <NativeFileReference Include="..\lib\FNA3D\browser-wasm\FNA3D.a">
+          <Visible>false</Visible>
+      </NativeFileReference>
+      <NativeFileReference Include="..\lib\FNA3D\browser-wasm\libmojoshader.a">
+          <Visible>false</Visible>
+      </NativeFileReference>
+      <NativeFileReference Include="..\lib\cimgui\browser-wasm\cimgui.a">
+          <Visible>false</Visible>
+      </NativeFileReference>
+      
+      <EmccExportedRuntimeMethod Include="SDL">
+          <Visible>false</Visible>
+      </EmccExportedRuntimeMethod>
+      <EmccExportedRuntimeMethod Include="GL">
+          <Visible>false</Visible>
+      </EmccExportedRuntimeMethod>
+      <EmccExportedRuntimeMethod Include="setMainLoop">
+          <Visible>false</Visible>
+      </EmccExportedRuntimeMethod>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FNAECSTemplate.Core\FNAECSTemplate.Core.csproj" />
+  </ItemGroup>
+
+    <PropertyGroup>
+        <CustomAssetRoot>..\FNAECSTemplate.Assets\assets</CustomAssetRoot>
+        <CustomAssetNewRoot>wwwroot\assets\</CustomAssetNewRoot>
+        <CustomAssetRelativeRoot>assets\</CustomAssetRelativeRoot>
+        <CustomAssetManifestRoot>wwwroot</CustomAssetManifestRoot>
+        <CustomAssetManifestFile>asset_manifest.csv</CustomAssetManifestFile>
+        <CustomAssetManifestVerbose>false</CustomAssetManifestVerbose>
+        <CustomAssetManifestVerbose Condition="$(Configuration) == 'Debug'">true</CustomAssetManifestVerbose>
+    </PropertyGroup>
+    <ItemGroup>
+        <CustomAssets Include="$(CustomAssetRoot)\**\*"
+                 Link="$(CustomAssetNewRoot)%(RecursiveDir)%(Filename)%(Extension)" 
+                 RelativePath="$(CustomAssetRelativeRoot)%(RecursiveDir)%(Filename)%(Extension)"
+                 CopyToPublishDirectory="PreserveNewest"/>
+        <Content Remove="$(CustomAssetManifestRoot)\$(CustomAssetManifestFile)" />
+    </ItemGroup>
+    <Target Name="CustomAssetManifest_PackageAssets" BeforeTargets="AssignTargetPaths">
+        <PropertyGroup>
+            <IntermediateCustomAssetManifestRootPath>$(IntermediateOutputPath)</IntermediateCustomAssetManifestRootPath>
+            <IntermediateCustomAssetManifestPath>$(IntermediateCustomAssetManifestRootPath)$(CustomAssetManifestFile)</IntermediateCustomAssetManifestPath>
+        </PropertyGroup>
+        <ItemGroup>
+            <CustomAssetsNoRoot Include="@(CustomAssets -> '\$(CustomAssetRelativeRoot)%(RecursiveDir)%(Filename)%(Extension)')" />
+        </ItemGroup>
+
+        <Message Text="No custom assets to bundle" Condition="@(CustomAssetsNoRoot->Count()) == 0 and $(CustomAssetManifestVerbose) == 'true'" />
+        <Message Text="Found @(CustomAssetsNoRoot->Count()) custom assets: @(CustomAssetsNoRoot)" Condition="@(CustomAssetsNoRoot->Count()) > 0 and $(CustomAssetManifestVerbose) == 'true'" />
+        <Message Text="Outputting custom asset manifest to: $(IntermediateCustomAssetManifestPath)" />
+        <WriteLinesToFile
+                File="$(IntermediateCustomAssetManifestPath)"
+                Lines="@(CustomAssetsNoRoot)"
+                Overwrite="true"
+        />
+
+        <ItemGroup>
+            <FileWrites Include="$(IntermediateCustomAssetManifestPath)" />
+        </ItemGroup>
+
+        <ItemGroup>
+            <IntermediateCustomAssetManifestItem
+                    Include="$(IntermediateCustomAssetManifestPath)"
+                    RelativePath="$(CustomAssetManifestFile)"
+            />
+        </ItemGroup>
+    </Target>
+
+    <Target Name="CustomAssetManifest_Build" DependsOnTargets="CustomAssetManifest_PackageAssets" BeforeTargets="GenerateStaticWebAssetsManifest">
+        <DefineStaticWebAssets
+                CandidateAssets="@(CustomAssets)"
+                SourceId="$(PackageId)"
+                SourceType="Computed"
+                AssetKind="Build"
+                AssetRole="Primary"
+                CopyToOutputDirectory="PreserveNewest"
+                CopyToPublishDirectory="Never"
+                ContentRoot="$(OutDir)/wwwroot"
+                BasePath="/"
+                RelativePathPattern=""
+                RelativePathFilter=""
+                Condition=""
+        >
+            <Output TaskParameter="Assets" ItemName="CustomAssetWebAssets" />
+        </DefineStaticWebAssets>
+        <DefineStaticWebAssets
+                CandidateAssets="@(IntermediateCustomAssetManifestItem)"
+                SourceId="$(PackageId)"
+                SourceType="Computed"
+                AssetKind="Build"
+                AssetRole="Primary"
+                CopyToOutputDirectory="PreserveNewest"
+                CopyToPublishDirectory="Never"
+                ContentRoot="$(OutDir)/wwwroot"
+                BasePath="/"
+                RelativePathPattern="$(IntermediateCustomAssetManifestRootPath)"
+                RelativePathFilter=""
+                Condition=""
+        >
+            <Output TaskParameter="Assets" ItemName="CustomAssetManifestAsset" />
+        </DefineStaticWebAssets>
+
+        <ItemGroup>
+            <StaticWebAsset Include="@(CustomAssetWebAssets)" />
+            <StaticWebAsset Include="@(CustomAssetManifestAsset)" />
+        </ItemGroup>
+    </Target>
+
+    <Target Name="CustomAssetManifest_Publish" DependsOnTargets="CustomAssetManifest_PackageAssets" BeforeTargets="ComputeFilesToPublish">
+        <DefineStaticWebAssets
+                CandidateAssets="@(CustomAssets)"
+                SourceId="$(PackageId)"
+                SourceType="Computed"
+                AssetKind="Publish"
+                AssetRole="Primary"
+                CopyToOutputDirectory="Never"
+                CopyToPublishDirectory="PreserveNewest"
+                ContentRoot="$(PublishDir)/wwwroot"
+                BasePath="/"
+                RelativePathPattern=""
+                RelativePathFilter=""
+                Condition=""
+        >
+            <Output TaskParameter="Assets" ItemName="CustomAssetWebAssets" />
+        </DefineStaticWebAssets>
+        <DefineStaticWebAssets
+                CandidateAssets="@(IntermediateCustomAssetManifestItem)"
+                SourceId="$(PackageId)"
+                SourceType="Computed"
+                AssetKind="Publish"
+                AssetRole="Primary"
+                CopyToOutputDirectory="Never"
+                CopyToPublishDirectory="PreserveNewest"
+                ContentRoot="$(PublishDir)/wwwroot"
+                BasePath="/"
+                RelativePathPattern="$(IntermediateCustomAssetManifestRootPath)"
+                RelativePathFilter=""
+                Condition=""
+        >
+            <Output TaskParameter="Assets" ItemName="CustomAssetManifestAsset" />
+        </DefineStaticWebAssets>
+
+        <ItemGroup>
+            <StaticWebAsset Include="@(CustomAssetWebAssets)" />
+            <StaticWebAsset Include="@(CustomAssetManifestAsset)" />
+        </ItemGroup>
+    </Target>
+</Project>

@@ -1,4 +1,4 @@
-hello. this is my personal template project for using [FNA](https://github.com/FNA-XNA/FNA) and [MoonTools.ECS](https://gitea.moonside.games/MoonsideGames/MoonTools.ECS) in visual studio code. 
+hello. this is my personal template project for using [FNA](https://github.com/FNA-XNA/FNA) and [MoonTools.ECS](https://gitea.moonside.games/MoonsideGames/MoonTools.ECS) in visual studio code. Windows users who just so happen to have the git bash can use `bash get_fnalibs.sh`. Not sure how to support Windows users who don't have git bash atm.
 
 ## what?
 
