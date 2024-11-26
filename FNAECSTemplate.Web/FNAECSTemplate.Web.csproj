@@ -15,19 +15,19 @@
   <ItemGroup>
       <!-- Get the emscripten-built binaries for these native files, and save them to the folders -->
       
-      <NativeFileReference Include="..\lib\SDL2\browser-wasm\SDL2.a">
+      <NativeFileReference Include="..\wasm-lib\SDL2\browser-wasm\SDL2.a">
           <Visible>false</Visible>
       </NativeFileReference>
-      <NativeFileReference Include="..\lib\FNA3D\browser-wasm\FAudio.a">
+      <NativeFileReference Include="..\wasm-lib\FNA3D\browser-wasm\FAudio.a">
           <Visible>false</Visible>
       </NativeFileReference>
-      <NativeFileReference Include="..\lib\FNA3D\browser-wasm\FNA3D.a">
+      <NativeFileReference Include="..\wasm-lib\FNA3D\browser-wasm\FNA3D.a">
           <Visible>false</Visible>
       </NativeFileReference>
-      <NativeFileReference Include="..\lib\FNA3D\browser-wasm\libmojoshader.a">
+      <NativeFileReference Include="..\wasm-lib\FNA3D\browser-wasm\libmojoshader.a">
           <Visible>false</Visible>
       </NativeFileReference>
-      <NativeFileReference Include="..\lib\cimgui\browser-wasm\cimgui.a">
+      <NativeFileReference Include="..\wasm-lib\cimgui\browser-wasm\cimgui.a">
           <Visible>false</Visible>
       </NativeFileReference>
       

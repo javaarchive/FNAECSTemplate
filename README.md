@@ -1,4 +1,7 @@
-hello. this is my personal template project for using [FNA](https://github.com/FNA-XNA/FNA) and [MoonTools.ECS](https://gitea.moonside.games/MoonsideGames/MoonTools.ECS) in visual studio code. Windows users who just so happen to have the git bash can use `bash get_fnalibs.sh`. Not sure how to support Windows users who don't have git bash atm.
+hello. this is my personal template project for using [FNA](https://github.com/FNA-XNA/FNA) and [MoonTools.ECS](https://gitea.moonside.games/MoonsideGames/MoonTools.ECS) in visual studio code. Windows users who just so happen to have the git bash can use `bash get_fnalibs.sh`. Not sure how to support Windows users who don't have git bash atm. Massive thanks to [RedMike's FNA WASM Sample](https://github.com/RedMike/FNA.WASM.Sample) for making it easy to apply workarounds for webassembly compilation.
+
+## wasm notes
+wasm libraries are locked atm as they seem to be more prone to breakage. they are just binaries blob under the `wasm-lib` directory, sometime in the future I should investigate a better way to include them not in the git repo directly.
 
 ## what?
 
