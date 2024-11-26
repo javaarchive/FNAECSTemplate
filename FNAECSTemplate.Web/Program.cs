@@ -13,7 +13,7 @@ public static partial class Program
 
     private static bool _firstRun = true;
     private static DateTime _lastLog = DateTime.UnixEpoch;
-    private static SampleGame _myGame;
+    private static Game1 _myGame;
 
     [JSExport]
     internal static void OnUserInteraction()
