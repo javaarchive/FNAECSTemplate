@@ -21,9 +21,16 @@ public static class Fonts
     public static void Initialize(ContentManager content)
     {
         Opensans = new FontSystem();
+        String basePath = ".";
+        if(Assembly.GetCallingAssembly().Location != null){
+            String assemblyPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
+            if(assemblyPath != null){
+                basePath = assemblyPath;
+            }
+        }
         Opensans.AddFont(File.ReadAllBytes(
             Path.Combine(
-                Path.GetDirectoryName(Assembly.GetCallingAssembly().Location), content.RootDirectory, @"fonts/opensans.ttf" 
+                basePath, content.RootDirectory, @"fonts/opensans.ttf" 
             )
         ));
     }
