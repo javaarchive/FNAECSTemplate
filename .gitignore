@@ -8,3 +8,5 @@ DesignTimeBuild/
 FileContentIndex/
 v17/
 .vs
+.vs/
+*.v2
