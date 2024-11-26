@@ -41,7 +41,7 @@ public class Game1 : Game
         //here is where i will make a plea to you, intrepid game developer:
         //please default your game to windowed mode.
         GraphicsDeviceManager = new GraphicsDeviceManager(this);
-        Content.RootDirectory = "Content";
+        Content.RootDirectory = "assets";
 
         GraphicsDeviceManager.PreferredBackBufferWidth = 1024;
         GraphicsDeviceManager.PreferredBackBufferHeight = 768;
