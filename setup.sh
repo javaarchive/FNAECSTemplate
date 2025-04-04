@@ -3,16 +3,7 @@
 # Exit immediately on error
 set -e
 
-mkdir -p libs
-cd libs
-
-echo -e "\e[32mDownloading fnalibs...\e[m"
-curl -O https://fna.flibitijibibo.com/archive/fnalibs.tar.bz2
-
-echo -e "\e[32mExtracting fnalibs...\e[m"
-tar -xf fnalibs.tar.bz2
-
-cd ..
+./get_fnalibs.sh
 
 git submodule update --init --remote --recursive
 
@@ -25,7 +16,7 @@ sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate.Core/FNAECSTemp
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate.sln
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" .vscode/launch.json
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" .vscode/tasks.json
-sed -i'.temp-bak' -e "s/Game1/${name}/g" FNAECSTemplate/Game1.cs
+sed -i'.temp-bak' -e "s/Game1/${name}/g" FNAECSTemplate.Core/Game1.cs
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate.Core/Game1.cs
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate.Core/Systems/ExampleSystem.cs
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate.Core/Components/Components.cs
