@@ -1,1 +1,1 @@
-dotnet build FNAECSTemplate/FNAECSTemplate.csproj -c Release
+dotnet build FNAECSTemplate.Console/FNAECSTemplate.Console.csproj -c Release
