@@ -16,11 +16,12 @@ sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate.Core/FNAECSTemp
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate.sln
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" .vscode/launch.json
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" .vscode/tasks.json
-# fix game references
-sed -i'.temp-bak' -e "s/Game1/${name}/g" FNAECSTemplate.Core/Game1.cs
-sed -i'.temp-bak' -e "s/Game1/${name}/g" FNAECSTemplate.Web/Program.cs
-sed -i'.temp-bak' -e "s/Game1/${name}/g" FNAECSTemplate.Console/Program.cs
+# new class name
+sed -i'.temp-bak' -e "s/Game1/${name}Game/g" FNAECSTemplate.Core/Game1.cs
+sed -i'.temp-bak' -e "s/Game1/${name}Game/g" FNAECSTemplate.Web/Program.cs
+sed -i'.temp-bak' -e "s/Game1/${name}Game/g" FNAECSTemplate.Console/Program.cs
 
+# esp needed to change namespaces
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate.Core/Game1.cs
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate.Core/Systems/ExampleSystem.cs
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate.Core/Components/Components.cs
@@ -40,6 +41,8 @@ sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate.Assets/FNAECSTe
 # patch console
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" build_debug.sh
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" build_release.sh
+# patch github actions
+sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" .github/workflows/deploy.yml
 
 find . -name "*.temp-bak" -type f -delete
 
