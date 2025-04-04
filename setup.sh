@@ -16,7 +16,11 @@ sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate.Core/FNAECSTemp
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate.sln
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" .vscode/launch.json
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" .vscode/tasks.json
+# fix game references
 sed -i'.temp-bak' -e "s/Game1/${name}/g" FNAECSTemplate.Core/Game1.cs
+sed -i'.temp-bak' -e "s/Game1/${name}/g" FNAECSTemplate.Web/Program.cs
+sed -i'.temp-bak' -e "s/Game1/${name}/g" FNAECSTemplate.Console/Program.cs
+
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate.Core/Game1.cs
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate.Core/Systems/ExampleSystem.cs
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate.Core/Components/Components.cs
