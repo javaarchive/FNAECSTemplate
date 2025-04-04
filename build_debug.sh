@@ -1,1 +1,1 @@
-dotnet build FNAECSTemplate/FNAECSTemplate.csproj -c Debug
+dotnet build FNAECSTemplate.Console/FNAECSTemplate.Console.csproj -c Debug
