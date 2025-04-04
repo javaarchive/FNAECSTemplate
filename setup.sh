@@ -38,6 +38,10 @@ sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate.Core/Utility/Ra
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate.Core/Content.cs
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate.Console/Program.cs
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate.Console/FNAECSTemplate.Console.csproj
+# web
+sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate.Web/FNAECSTemplate.Web.csproj
+sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate.Web/Program.cs
+sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" FNAECSTemplate.Assets/FNAECSTemplate.Assets.csproj
 # patch console
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" build_debug.sh
 sed -i'.temp-bak' -e "s/FNAECSTemplate/${name}/g" build_release.sh
@@ -48,6 +52,12 @@ mv "FNAECSTemplate.sln" "${name}.sln"
 mv "FNAECSTemplate.Core/FNAECSTemplate.Core.csproj" "FNAECSTemplate.Core/${name}.Core.csproj"
 mv "FNAECSTemplate.Core/Game1.cs" "FNAECSTemplate.Core/${name}.cs"
 mv "FNAECSTemplate.Core" "${name}.Core"
+# rename Web
+mv "FNAECSTemplate.Web/FNAECSTemplate.Web.csproj" "FNAECSTemplate.Web/${name}.Web.csproj"
+mv "FNAECSTemplate.Web" "${name}.Web"
+# rename assets
+mv "FNAECSTemplate.Assets/FNAECSTemplate.Assets.csproj" "FNAECSTemplate.Assets/${name}.Assets.csproj"
+mv "FNAECSTemplate.Assets" "${name}.Assets"
 # rename console
 mv "FNAECSTemplate.Console/FNAECSTemplate.Console.csproj" "FNAECSTemplate.Console/${name}.Console.csproj"
 mv "FNAECSTemplate.Console" "${name}.Console"
