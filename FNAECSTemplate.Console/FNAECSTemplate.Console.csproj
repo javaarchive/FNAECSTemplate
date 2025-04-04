@@ -28,7 +28,7 @@
         <None Include="..\libs\x64\libtheorafile.dll" CopyToOutputDirectory="PreserveNewest">
             <Visible>false</Visible>
         </None>
-        <None Include="..\libs\x64\SDL2.dll" CopyToOutputDirectory="PreserveNewest">
+        <None Include="..\libs\x64\SDL3.dll" CopyToOutputDirectory="PreserveNewest">
             <Visible>false</Visible>
         </None>
     </ItemGroup>
