@@ -2,13 +2,16 @@
 mkdir -p libs
 cd libs
 
-#echo -e "\e[32mDownloading fnalibs...\e[m"
-#curl -O https://fna.flibitijibibo.com/archive/fnalibs.tar.bz2
+echo -e "\e[32mDownloading fnalibs (from fixed archive)...\e[m"
+# -L needed to follow redirects
+curl -OL https://github.com/javaarchive/binary-blob-snapshots/releases/download/2025.4.4/fnalibs.zip
+curl -OL https://github.com/javaarchive/binary-blob-snapshots/releases/download/2025.4.4/fnalibs-apple.zip
+echo -e "\e[32mExtracting fnalibs...\e[m"
+unzip fnalibs-apple.zip
+rm README.txt
+unzip fnalibs.zip
 
-#echo -e "\e[32mExtracting fnalibs...\e[m"
-#tar -xf fnalibs.tar.bz2
-
-echo This script doesn't work anymore.
-echo Go to https://github.com/FNA-XNA/fnalibs-dailies for now.
+# delete orig zips
+rm libs/*.zip
 
 cd ..
