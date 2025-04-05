@@ -48,7 +48,7 @@ find . -name "*.temp-bak" -type f -delete
 
 mv "FNAECSTemplate.sln" "${name}.sln"
 mv "FNAECSTemplate.Core/FNAECSTemplate.Core.csproj" "FNAECSTemplate.Core/${name}.Core.csproj"
-mv "FNAECSTemplate.Core/Game1.cs" "FNAECSTemplate.Core/${name}.cs"
+mv "FNAECSTemplate.Core/Game1.cs" "FNAECSTemplate.Core/${name}Game.cs"
 mv "FNAECSTemplate.Core" "${name}.Core"
 # rename Web
 mv "FNAECSTemplate.Web/FNAECSTemplate.Web.csproj" "FNAECSTemplate.Web/${name}.Web.csproj"
